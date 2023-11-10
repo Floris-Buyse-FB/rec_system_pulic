@@ -26,17 +26,19 @@ if uploaded_file is not None:
             else:
                 # get the hulp dataframe
                 df_hulp = preproces_df()
+                # turn df_clean which is only 1 row into a dataframe, into a string
+                df_clean = df_clean.to_string(header=False, index=False, index_names=False)
                 # get the recommendations
-                response_df = recommend(df_hulp, df_clean)
-                # rename the columns
-                # response_df.rename(columns={0: 'contact_contactpersoon_id', 1: 'marketing_pressure'}, inplace=True)
+                response_list = recommend(df_hulp, df_clean)
+                # turn into dataframe
+                response_df = pd.DataFrame(response_list, columns=['contact_contactpersoon_id', 'marketing_pressure'])
                 # getting other information about the contact persons
-                response_df = clean_contact_df(response_df['contact_contactpersoon_id'], response_df)
+                response_df = clean_contact_df(response_df['contact_contactpersoon_id'], df_hulp)
                 # display the response
                 st.write('Recommended contact persons')
                 st.write(response_df)
-        except:
-            st.write('Something went wrong, please try again')
+        except Exception as e:
+            st.write('Something went wrong, please try again\n', e)
 
    
 
