@@ -13,8 +13,8 @@ from nltk.stem.snowball import SnowballStemmer
 nltk.download('stopwords')
 nltk.download('punkt')
 
-CSV_FILE = os.path.join(os.getcwd(), '/data_clean/final_merge_clean.csv')
-CONTACT = os.path.join(os.getcwd(), '/data_clean/zz_account_contact_persoon_finance.csv')
+CSV_FILE = os.path.join(os.getcwd(), './data_clean/final_merge_clean.csv')
+CONTACT = os.path.join(os.getcwd(), './data_clean/zz_account_contact_persoon_finance.csv')
 
 def remove_stopwords(text):
     stop_words_nl = set(stopwords.words('dutch'))
