@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from utils.app_utils_functions import clean_new_campaign_data, clean_contact_df, recommend, preproces_df
 
-API_ENDPOINT = 'http://localhost:5000/post_data'
-
 # Streamlit UI
 st.title('Post a csv file and get recommendations')
 
@@ -31,7 +29,7 @@ if uploaded_file is not None:
                 # get the recommendations
                 response_df = recommend(df_hulp, df_clean)
                 # rename the columns
-                response_df.rename(columns={0: 'contact_contactpersoon_id', 1: 'marketing_pressure'}, inplace=True)
+                # response_df.rename(columns={0: 'contact_contactpersoon_id', 1: 'marketing_pressure'}, inplace=True)
                 # getting other information about the contact persons
                 response_df = clean_contact_df(response_df['contact_contactpersoon_id'], response_df)
                 # display the response
