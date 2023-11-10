@@ -78,7 +78,7 @@ def clean_text(df, col='keyphrase'):
     
     df_copy[col] = df_copy[col].str.replace('voka', ' ') \
         .str.replace('ov', '').str.replace('unknown', '').str.replace(r'\b\w{1,3}\b', '', regex=True).str.replace(r'\d+', '', regex=True) \
-        .str.replace(r'(\s{2},\s{2}),*+', '', regex=True).str.replace(' ', '').str.replace(r'^,+|,+$', '', regex=True) \
+        .str.replace(r'(\s{2},\s{2}),*', '', regex=True).str.replace(' ', '').str.replace(r'^,+|,+$', '', regex=True) \
         .str.replace(r',,+', ',', regex=True)
 
     return df_copy
