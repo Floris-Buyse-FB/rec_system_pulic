@@ -1,7 +1,6 @@
 import streamlit as st
-import requests
 import pandas as pd
-from utils.app_utils_functions import clean_new_campaign_data, clean_contact_df
+from utils.app_utils_functions import clean_new_campaign_data, clean_contact_df, recommend, preproces_df
 
 API_ENDPOINT = 'http://localhost:5000/post_data'
 
@@ -27,12 +26,11 @@ if uploaded_file is not None:
             if df_clean.empty:
                 st.write('Campaign ID not found')
             else:
-                # convert the dataframe to a dictionary
-                data = df_clean.to_dict(orient='records')
-                # post the data to the API
-                response = requests.post(API_ENDPOINT, json=data)
-                # turn response into a dataframe
-                response_df = pd.DataFrame(response.json())
+                # get the hulp dataframe
+                df_hulp = preproces_df()
+                # get the recommendations
+                response_df = recommend(df_hulp, df_clean)
+                # rename the columns
                 response_df.rename(columns={0: 'contact_contactpersoon_id', 1: 'marketing_pressure'}, inplace=True)
                 # getting other information about the contact persons
                 response_df = clean_contact_df(response_df['contact_contactpersoon_id'], response_df)
