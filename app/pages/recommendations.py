@@ -31,7 +31,7 @@ if uploaded_file is not None:
                 # get the recommendations
                 response_list = recommend(df_hulp, df_clean)
                 # turn into dataframe
-                response_df = pd.DataFrame(response_list, columns=['contact_contactpersoon_id', 'marketing_pressure'])
+                response_df = pd.DataFrame(response_list)
                 # getting other information about the contact persons
                 response_df = clean_contact_df(response_df['contact_contactpersoon_id'], df_hulp)
                 # display the response
