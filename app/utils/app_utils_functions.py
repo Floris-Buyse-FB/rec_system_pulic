@@ -153,6 +153,7 @@ def clean_contact_df(lijst, response_df):
     contact_df = pd.read_csv(CONTACT)
     contact_df = contact_df[contact_df['contact_contactpersoon_id'].isin(lijst)]
     contact_df = contact_df.drop(['marketing_pressure'], axis=1)
+    response_df.drop(['keyphrases'], axis=1, inplace=True)
     response_df = pd.merge(response_df, contact_df, on='contact_contactpersoon_id')
     response_df['functie_naam'] = response_df['functie_naam'].apply(lambda x: ', '.join(list(set(x.split(' ')))))
     response_df['account_adres'] = response_df['account_adres'].apply(lambda x: ', '.join(list(set(x.split(' ')))))

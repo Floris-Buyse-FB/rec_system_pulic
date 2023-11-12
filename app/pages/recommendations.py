@@ -24,12 +24,13 @@ if uploaded_file is not None:
             if df_clean.empty:
                 st.write('Campaign ID not found')
             else:
+                top_n = int(st.text_input('How many recommendations do you want?', value=10))
                 # get the hulp dataframe
                 df_hulp = preproces_df()
                 # turn df_clean which is only 1 row into a dataframe, into a string
                 df_clean = df_clean.to_string(header=False, index=False, index_names=False)
                 # get the recommendations
-                response_list = recommend(df_hulp, df_clean)
+                response_list = recommend(df_hulp, df_clean, top_n=top_n)
                 # turn into dataframe
                 response_df = pd.DataFrame(response_list)
                 # rename columns
