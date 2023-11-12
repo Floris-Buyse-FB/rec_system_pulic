@@ -35,7 +35,13 @@ if uploaded_file is not None:
                 if df_clean.empty:
                     st.write('Campaign ID not found')
                 else:
-                    top_n = int(st.text_input('How many recommendations do you want?', value=10))
+                    top_n = st.text_input('How many recommendations do you want?', value=10)
+                    # make sure the input is a number
+                    try:
+                        top_n = int(top_n)
+                    except:
+                        st.write('Please enter a number')
+                        top_n = 10
                     # get the hulp dataframe
                     df_hulp = preproces_df()
                     # turn df_clean which is only 1 row into a dataframe, into a string
