@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils.app_utils_functions import clean_new_campaign_data, clean_contact_df, recommend, preproces_df
+from utils.app_utils_functions import *
 
 # Streamlit UI
 st.title('Post a csv file and get recommendations')
